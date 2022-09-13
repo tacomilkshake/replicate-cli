@@ -1,0 +1,20 @@
+v0.1.0
+Code cleanup
+Document code where needed
+Publish to GitHub with license
+"Release in GitHub"
+
+v0.2.0
+Support text models, like Stable Diffusion
+Support models with unique inputs using via flags or arguments
+Add local file support as image input
+Save output to local file
+Consider normalizing model output (always wrap in JSON?)
+
+v0.?
+Tests?
+Improved documentation?
+Packagecloud binary support?
+
+Notes:
+Suggest Replicate team return 404 for https://api.replicate.com/v1/predictions on non-existant version IDs
