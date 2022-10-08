@@ -3,8 +3,7 @@ package cmd
 import (
 	"os"
 
-	token "github.com/jamiesteven/replicate-cli/lib"
-
+	"github.com/jamiesteven/replicate-cli/internal/pkg/token"
 	"github.com/spf13/cobra"
 )
 
@@ -12,10 +11,10 @@ var TokenFlag string
 var TokenKey string
 
 var rootCmd = &cobra.Command{
-	Use:   "replicate-cli [command]",
+	Use:   "replicate [command]",
 	Short: "replicate-cli",
 	Long: `replicate-cli 💫 A command line interface for Replicate ❤️
-Version 0.1.0 by Jamie Steven (github.com/jamiesteven)`,
+Version 0.2.0 by Jamie Steven (github.com/jamiesteven/replicate-cli)`,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		tokenResp, err := token.GetTokenKey(TokenFlag)
 		if err != nil {

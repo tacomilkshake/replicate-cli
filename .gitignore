@@ -17,5 +17,34 @@ vendor/
 # Go workspace file
 go.work
 
+# Misc
+.DS_Store
+
 # Binary
 replicate
+replicate-cli
+
+# Media
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.webp
+*.tiff
+*.tif
+*.bmp
+*.psd
+*.raw
+*.cr2
+*.nef
+*.orf
+*.sr2
+*.arw
+*.dng
+*.heic
+*.heif
+*.avif
+*.jp2
+*.j2k

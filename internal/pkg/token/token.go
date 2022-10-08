@@ -14,7 +14,7 @@ func GetTokenKey(tokenFlag string) (string, error) {
 		if os.Getenv("REPLICATE_TOKEN") != "" {
 			tokenString = os.Getenv("REPLICATE_TOKEN")
 		} else {
-			return "", errors.New("No token provided. Specify Replicate API token with --token or REPLICATE_TOKEN environment variable.\n")
+			return "", errors.New("no token provided. specify Replicate API token with --token or REPLICATE_TOKEN environment variable")
 		}
 	}
 
