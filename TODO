@@ -1,20 +1,40 @@
-v0.1.0
+v0.1.x
+Experimental support
 Code cleanup
 Document code where needed
 Publish to GitHub with license
 "Release in GitHub"
 
-v0.2.0
-Support text models, like Stable Diffusion
-Support models with unique inputs using via flags or arguments
-Add local file support as image input
-Save output to local file
-Consider normalizing model output (always wrap in JSON?)
+v0.2.x
+Change to 'replicate' as primary command, from 'replicate-cli'
+run command: run a model
+  Support most models with command line parameter support
+  Shorthand support for inputting parameters using https://github.com/danielgtaylor/shorthand
+  Command chaining: run commands supports piping input from one replicate command to another
+  Support local file as image input
+  Normalize model output to output as a standardized URL
+  Improved waiting indicator
+info command: get info about models
+input command: get the inputs for a specific model
+Normalize errors
+Add known issues
+Give credit to primary packages
 
-v0.?
-Tests?
-Improved documentation?
-Packagecloud binary support?
+v0.3.0 (or later)
+Optionally save output to local file
+Explore support for non-image models, like Whisper
+start command - run model asynchronously
+predictions command - list, view and stop predictions
+models/collections command - list and view models
+Provide shorthand input examples for each model
+Improved documentation for each command
+Notate required fields on inputs
+Pre-compiled binary support (Packagecloud, Homebrew tap, etc)
+Tests
+
+Known issues:
+Currently does not support the output of multiple images; Replicate API issue?
+Does not support image URL paths that includes commas - shorthand uses commas to delineate args
 
 Notes:
-Suggest Replicate team return 404 for https://api.replicate.com/v1/predictions on non-existant version IDs
+Suggest Replicate team return 404 for https://api.replicate.com/v1/predictions on non-existent version IDs

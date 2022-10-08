@@ -17,5 +17,5 @@ vendor/
 # Go workspace file
 go.work
 
-# Binary
-replicate
+# Misc
+.DS_Store

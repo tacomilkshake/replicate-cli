@@ -1,62 +1,120 @@
 # replicate-cli
-Command line interface for the Replicate API, powered by Go.
+Command line interface for the [Replicate API](https://replicate.com/docs/reference/http), powered by Go.
 
-### Version 0.1.0 - Experimental Support
+Run open source AI models from the command line using [Replicate.com's](https://replicate.com) hardware.
 
-Run models and retrieves model version IDs. See TODO for proposed feature list. Currently only supports models that accept a single "image" input. **Note: Stable Diffusion and other text input models are not yet supported, but will be soon. Executable name may change to replicate, from replicate-cli.** 
+## Features
+
+Version 0.2.2 - Expanded model support + chaining
+
+* Run models
+* Chaining: pass the output of one model to another replicate command
+* URL or Local file support
+* Get model info
+* Get model input parameters
+* Get model versions
 
 ## Requirements
 * Go 1.19
 * Replicate API Token, [get yours here](https://replicate.com/account).
 
-## Install, Build & Run
+## Installation
 
 ### Install
+[go](https://go.dev/dl/) is required.
 ```
-go install github.com/jamiesteven/replicate-cli@latest
+go install github.com/jamiesteven/replicate-cli/cmd/replicate@latest
 ```
 
 ### Run
 ```
-replicate-cli
+replicate
 ```
 
 ### Uninstall
 ```
-rm $GOPATH/bin/replicate-cli
+rm $GOPATH/bin/replicate
 ```
 
-## How to use
+## Usage
 
 ### Authentication
-The Replicate API requires an API token. [Get one here.](https://replicate.com/account).
+The Replicate API requires an API token. [Get one here.](https://replicate.com/account)
 
 Set a ```REPLICATE_TOKEN``` environment variable, or use ```--token <your key here>```.
 ```
-replicate-cli --token <your key here>
+replicate --token <your key here>
 ```
 
-### Get model versions
+### Input Parameters
+Input parameters use the [shorthand](https://github.com/danielgtaylor/shorthand) format, separated by comma.
 ```
-replicate-cli versions jingyunliang/swinir
+image:https://picsum.photos/512/512, fidelity:0.4
 ```
 
-### Run a model
+### run: run a model
+```
+replicate run [model] [inputs]
+```
 
-**Run using model name.** replicate-cli will use the latest version.
+#### Run a model with parameter input
 ```
-replicate-cli run jingyunliang/swinir [input]
+replicate run stability-ai/stable-diffusion prompt:photo of a cat
 ```
-Input currently supports a fully qualified domain-name.
 
-**Run using version ID.**
+#### Run a model using an image URL
 ```
-replicate-cli run jingyunliang/swinir
+replicate run jingyunliang/swinir image:https://picsum.photos/512/512
+```
+
+#### Run a model using using a local image
+```
+replicate run jingyunliang/swinir image:/path/to/file.png
+```
+
+### Chaining: run multiple AI models in succession
+Pipe the output of one replicate command to another:
+```
+replicate run stability-ai/stable-diffusion prompt:photo of a smiling person \
+| replicate run jingyunliang/swinir image: \
+| replicate run sczhou/codeformer codeformer_fidelity:0.4, upscale:1, image:
+```
+
+### info: get model info
+```
+replicate info [model]
+
+replicate info stability-ai/stable-diffusion
+```
+
+### inputs: get inputs for a specific model
+```
+replicate inputs [model] [?version]
+
+replicate inputs jingyunliang/swinir
+
+replicate inputs jingyunliang/swinir 9d91795e944f3a585fa83f749617fc75821bea8b323348f39cf84f8fd0cbc2f7
+```
+
+### versions: get versions for a specific model
+```
+replicate versions [model]
+
+replicate versions jingyunliang/swinir
 ```
 
 ## Development
-Pull requests welcome! replicate-cli is built using [Cobra](https://cobra.dev).
+Pull requests welcome!
 
----
+## Credits
+
+replicate-cli uses the following packages:
+
+* [cobra](https://github.com/spf13/cobra)
+* [shorthand](https://github.com/danielgtaylor/shorthand)
+* [resty](https://github.com/go-resty/resty)
+* [gjson](https://github.com/tidwall/gjson)
+* [tablewritter](https://github.com/olekukonko/tablewriter)
+* [spinner](https://github.com/briandowns/spinner)
 
 **Copyright (c) 2022 Jamie Steven. Licensed Under Apache 2.0.**
