@@ -3,17 +3,16 @@ Command line interface for the [Replicate API](https://replicate.com/docs/refere
 
 Run open source AI models from the command line using [Replicate.com's](https://replicate.com) hardware.
 
-### Version 0.2.0 - Expanded model support + chaining
-
 ## Features
 
-* run: Run models
-* Chaining: pass the output of one model to another replicate command
-* info: Get model info
-* inputs: Get model commands
-* version: Get model versions
+Version 0.2.0 - Expanded model support + chaining
 
-Run models and retrieves model version IDs. See TODO for proposed feature list. Currently only supports models that accept a single "image" input. **Note: Stable Diffusion and other text input models are not yet supported, but will be soon. Executable name may change to replicate, from replicate-cli.** 
+* Run models
+* Chaining: pass the output of one model to another replicate command
+* URL or Local file support
+* Get model info
+* Get model input parameters
+* Get model versions
 
 ## Requirements
 * Go 1.19
@@ -22,7 +21,7 @@ Run models and retrieves model version IDs. See TODO for proposed feature list. 
 ## Installation
 
 ### Install
-go is required. [Download go](https://go.dev/dl/)
+[go](https://go.dev/dl/) is required.
 ```
 go install github.com/jamiesteven/replicate-cli/cmd/replicate
 ```
@@ -40,7 +39,7 @@ rm $GOPATH/bin/replicate
 ## Usage
 
 ### Authentication
-The Replicate API requires an API token. [Get one here.](https://replicate.com/account).
+The Replicate API requires an API token. [Get one here.](https://replicate.com/account)
 
 Set a ```REPLICATE_TOKEN``` environment variable, or use ```--token <your key here>```.
 ```
@@ -48,12 +47,10 @@ replicate --token <your key here>
 ```
 
 ### Input Parameters
-Input parameters using [shorthand](https://github.com/danielgtaylor/shorthand) format, separated by comma.
+Input parameters use the [shorthand](https://github.com/danielgtaylor/shorthand) format, separated by comma.
 ```
 image:https://picsum.photos/512/512, fidelity:0.4
 ```
-
-## Commands
 
 ### run: run a model
 ```
@@ -62,8 +59,6 @@ replicate run [model] [inputs]
 
 #### Run a model with parameter input
 ```
-replicate run [model] [inputs]
-
 replicate run stability-ai/stable-diffusion prompt:photo of a cat
 ```
 
@@ -77,7 +72,7 @@ replicate run jingyunliang/swinir image:https://picsum.photos/512/512
 replicate run jingyunliang/swinir image:/path/to/file.png
 ```
 
-### Chaining: run multiple AI models at in succession
+### Chaining: run multiple AI models in succession
 Pipe the output of one replicate command to another:
 ```
 replicate run stability-ai/stable-diffusion prompt:photo of a smiling person \
@@ -111,17 +106,15 @@ replicate versions jingyunliang/swinir
 ## Development
 Pull requests welcome!
 
----
-
 ## Credits
 
 replicate-cli uses the following packages:
 
 * [cobra](https://github.com/spf13/cobra)
 * [shorthand](https://github.com/danielgtaylor/shorthand)
-* [resty](https://github.com/go-resty/resty/v2)
+* [resty](https://github.com/go-resty/resty)
 * [gjson](https://github.com/tidwall/gjson)
 * [tablewritter](https://github.com/olekukonko/tablewriter)
-* [spinner](github.com/briandowns/spinner)
+* [spinner](https://github.com/briandowns/spinner)
 
 **Copyright (c) 2022 Jamie Steven. Licensed Under Apache 2.0.**
